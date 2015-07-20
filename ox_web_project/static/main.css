@@ -6,10 +6,17 @@
 	background-color: #333333;
 	width: 120px;
 	border-radius: 5px;
+	float: left;
+	padding: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.main_body {
+	margin: 10px 10px 10px 10px;
 }
 
 a.left_list {
-	display: block;
 	float: left;
 	font-weight: bold;
 	font-size: 10px;
