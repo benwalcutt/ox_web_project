@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMP_DIR = os.path.dirname(BASE_DIR)
+TEMPLATE_PATH = os.path.join(TEMP_DIR, 'templates')
+TEMPLATE_DIRS = (
+	TEMPLATE_PATH,
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ox_web',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,7 +57,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'ox_web_project.urls'
-
+"""
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,7 +73,7 @@ TEMPLATES = [
         },
     },
 ]
-
+"""
 WSGI_APPLICATION = 'ox_web_project.wsgi.application'
 
 
@@ -98,5 +104,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATIC_PATH = os.path.join(TEMP_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+	STATIC_PATH,
+)

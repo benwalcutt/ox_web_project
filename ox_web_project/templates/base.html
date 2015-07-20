@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+  <title>Web Interface{% block title %}{% endblock %}</title>
+
+</head>
+
+<body>
+  <div class="header">
+    <ul>
+      <li><a href="/ox_web/"><br />Home</a></li>
+      <li><a href="https://dna.physics.ox.ac.uk"><br />About</a></li>
+      <li><a href="self-assembly.net">Self Assembly Group</a></li>
+    </ul>
+  </div>
+  <br />
+  <div class="left_bar">
+    <ul>
+      <li><a class="left_list" href="#">Login</a></li>
+      <li><a class="left_list" href="#">Logout</a></li>
+    </ul>
+  </div>
+  <div>
+  {% block body_block %}
+
+  {% endblock %}
+  </div>
+</body>
+
+</html>
