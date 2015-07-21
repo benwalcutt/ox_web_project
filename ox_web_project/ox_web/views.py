@@ -6,6 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
+def contact(request):
+  return render(request, 'ox_web/contact.html', {})
+
 @login_required
 def user_logout(request):
   logout(request)
