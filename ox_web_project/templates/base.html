@@ -5,7 +5,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-  <title>Web Interface{% block title %}{% endblock %}</title>
+  <title>Web Interface {% block title %}{% endblock %}</title>
 
 </head>
 
@@ -20,18 +20,11 @@
 
   <div class="left_bar">
     <ul>
-      <li><a class="left_list" href="#">Login</a></li>
-      <li><a class="left_list" href="#">Logout</a></li>
-      <li><a class="left_list" href="#">Login</a></li>
-      <li><a class="left_list" href="#">Logout</a></li>
-      <li><a class="left_list" href="#">Login</a></li>
-      <li><a class="left_list" href="#">Logout</a></li>
-      <li><a class="left_list" href="#">Login</a></li>
-      <li><a class="left_list" href="#">Logout</a></li>
-      <li><a class="left_list" href="#">Login</a></li>
-      <li><a class="left_list" href="#">Logout</a></li>
-      
-      
+      {% if user.is_authenticated %}
+      <li><a href="/ox_web/logout/" class="left_list">Logout</a></li>
+      {% else %}
+      <li><a href="/ox_web/login/" class="left_list">Login</a></li>
+      {% endif %}      
     </ul>
   </div>
   <div class="main_body">

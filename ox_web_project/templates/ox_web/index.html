@@ -2,8 +2,12 @@
 
 {% load staticfiles %}
 
-{% block title%}Index{% endblock %}
+{% block title%}Home{% endblock %}
 
 {% block body_block %}
-  <h1>Stuff</h1>
+  {% if user.is_authenticated %}
+    <h1>Hello {{user.username}}</h1>
+  {% else %}
+    <h1>Please login.</h1>
+  {% endif %}
 {% endblock %}
