@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Register{% endblock %}
+
+{% block body_block %}
+
+  <h1>Register with Ox Web Interface</h1>
+
+  {% if registered %}
+    <strong>Thank you for registering!</strong><br />
+    <a href="/ox_web/">Return to the Homepage</a><br />
+
+  {% else %}
+    <form id="user_form" method="post" action="/ox_web/register/" enctype="multipart/form-data">
+
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+
+    <input type="submit" name="submit" value="Register" />
+    </form>
+  {% endif %}
+{% endblock %}

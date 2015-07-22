@@ -14,4 +14,11 @@ class UserProfileForm(forms.ModelForm):
     model = UserProfile
     fields = ('website',)
 
+class BlogPost(forms.ModelForm):
+  title = forms.CharField(max_length=100)
+  slug = forms.SlugField(max_length=100)
+  body = forms.CharField(widget=forms.Textarea)
+  posted = forms.DateTimeField(auto_now_add=True)
 
+  class Meta:
+    model = Blog
