@@ -15,16 +15,17 @@
       <li class="col-2"><a href="/ox_web/">Home</a></li>
       <li class="col-2"><a href="https://dna.physics.ox.ac.uk">About</a></li>
       <li class="col-2"><a href="/ox_web/contact/">Contact</a></li>
-      <li class="col-3"><a href="self-assembly.net">Self Assembly Group</a></li>
+      <li class="col-3"><a href="http://self-assembly.net">Self Assembly Group</a></li>
     </ul>
   </div>
 
   <div class="col-2 menu">
     <ul>
       {% if user.is_authenticated %}
-      <li><a href="/ox_web/logout/" class="left_list">Logout</a></li>
+      <li><a href="/ox_web/" class="left_list">Dashboard</a></li>
       <li><a href="/ox_web/{{ user.username }}/jobs/" class="left_list">My Jobs</a></li>
-      <li><a href="/ox_web/add_blog_post/" class="left_list">Add Post</a></li>
+      <li><a href="/ox_web/add_post/" class="left_list">Add Post</a></li>
+      <li><a href="/ox_web/logout/" class="left_list">Logout</a></li>
       {% else %}
       <li><a href="/ox_web/login/" class="left_list">Login</a></li>
       <li><a href="/ox_web/register/" class="left_list">Register</a></li>

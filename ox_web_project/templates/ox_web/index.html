@@ -15,6 +15,10 @@
     <ul>
       {% for post in blog_list %}
         <li>{{ post.title }}</li>
+        {{ post.body }}
+        <br />
+        {{ post.posted }}
+        <br /><br />
       {% endfor %}
     </ul>
   {% else %}

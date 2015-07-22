@@ -1,11 +1,35 @@
-from ox_web.forms import UserForm, UserProfileForm
+from ox_web.forms import UserForm, UserProfileForm, BlogPost
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from ox_web.models import Blog
+import os
+
+DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # Create your views here.
+
+def test(request):
+  print BASE_DIR
+  return HttpResponseRedirect('/ox_web/')
+
+@login_required
+def add_post(request):
+  if request.method == 'POST':
+    post_form = BlogPost(data=request.POST)
+
+    if post_form.is_valid():
+      post = post_form.save()
+      post.save()
+
+    else:
+      print post_form.errors
+  else:
+    post_form = BlogPost()
+
+  return render(request, 'ox_web/add_post.html', {'post_form': post_form})
+    
 
 def register(request):
   registered = False;
@@ -23,8 +47,8 @@ def register(request):
       profile.user = user
 
       profile.save()
+      os.mkdir(DATA_PATH + '/data/' + user.username)
       registered = True
-
     else:
       print user_form.errors, profile_form.errors
 
