@@ -6,6 +6,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
+def jobs(request, username):
+  print username
+  return render(request, 'ox_web/jobs.html', {})
+
 def contact(request):
   return render(request, 'ox_web/contact.html', {})
 

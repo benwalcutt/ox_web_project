@@ -23,6 +23,7 @@
     <ul>
       {% if user.is_authenticated %}
       <li><a href="/ox_web/logout/" class="left_list">Logout</a></li>
+      <li><a href="/ox_web/{{ user.username }}/jobs/" class="left_list">My Jobs</a></li>
       {% else %}
       <li><a href="/ox_web/login/" class="left_list">Login</a></li>
       {% endif %}      
