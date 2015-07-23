@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from ox_web.models import Blog, Job
 from django.utils import timezone
 import os
+import ox_web.utils
 
 DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 
@@ -14,9 +15,19 @@ DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 def new_job(request):
   if request.method == 'POST':
     in_form = InputForm(data=request.POST)
-
-    job = Job(author=request.user.username, created_at=timezone.now())
+    JOB_PATH = DATA_PATH + '/data/' + request.user.username
+    job = Job(author=request.user.username, created_at=timezone.now(), data_path=JOB_PATH)
     job.save()
+    job.output_path = JOB_PATH + '/' + str(job.id)
+    job.save()
+
+    os.mkdir(DATA_PATH + '/data/' + request.user.username + '/' + str(job.id))
+
+    if in_form.is_valid():
+      inputfile = in_form.cleaned_data
+      
+    else:
+      print in_form.errors
     
     return HttpResponseRedirect('/ox_web/'+request.user.username+'/jobs/')
   else:
@@ -26,7 +37,7 @@ def new_job(request):
 
 
 def test(request):
-  print BASE_DIR
+  utils.test()
   return HttpResponseRedirect('/ox_web/')
 
 @login_required

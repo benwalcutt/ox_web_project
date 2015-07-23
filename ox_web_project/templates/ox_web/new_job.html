@@ -10,7 +10,7 @@
   <h5>Leave blank to use defaults in parentheses.</h5>
   <form id="start_job" method="post" action="/ox_web/new_job/" enctype=multipart/form-data">
   {% csrf_token %}
-  {{ in_form.as_p }}
+  {{ in_form.as_ul }}
   <input type="submit" name="submit" value="Start Job" />
   <br />
   <br />

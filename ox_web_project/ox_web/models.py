@@ -29,3 +29,5 @@ class Blog(models.Model):
 class Job(models.Model):
   author = models.CharField(max_length=100)
   created_at = models.DateTimeField(default=timezone.now)
+  data_path = models.CharField(max_length=200)
+  output_path = models.CharField(max_length=200)
