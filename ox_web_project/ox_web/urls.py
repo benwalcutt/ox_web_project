@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 	url(r'^contact/$', views.contact, name="contact"),
 	url(r'^(?P<username>[\w]+)/jobs/$', views.jobs, name="jobs"),
 	url(r'^register/$', views.register, name="register"),
-	url(r'^add_post/$', views.add_post, name="add_post"),
+	url(r'^(?P<username>[\w]+)/add_post/$', views.add_post, name="add_post"),
+	url(r'^new_job/$', views.new_job, name="new_job"),
 	url(r'^test/$', views.test, name="test"),
 )

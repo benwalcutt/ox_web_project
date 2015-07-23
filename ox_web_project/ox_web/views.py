@@ -1,36 +1,53 @@
-from ox_web.forms import UserForm, UserProfileForm, BlogPost
+from ox_web.forms import UserForm, UserProfileForm, BlogPost, InputForm, JobForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from ox_web.models import Blog
+from ox_web.models import Blog, Job
+from django.utils import timezone
 import os
 
 DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # Create your views here.
 
+def new_job(request):
+  if request.method == 'POST':
+    in_form = InputForm(data=request.POST)
+
+    job = Job(author=request.user.username, created_at=timezone.now())
+    job.save()
+    
+    return HttpResponseRedirect('/ox_web/'+request.user.username+'/jobs/')
+  else:
+    in_form = InputForm()
+    context_dict = {'username': request.user.username, 'in_form': in_form}
+  return render(request, 'ox_web/new_job.html', context_dict)
+
+
 def test(request):
   print BASE_DIR
   return HttpResponseRedirect('/ox_web/')
 
 @login_required
-def add_post(request):
+def add_post(request, username):
   if request.method == 'POST':
     post_form = BlogPost(data=request.POST)
 
     if post_form.is_valid():
       post = post_form.save()
+      post.author = username
       post.save()
 
     else:
       print post_form.errors
+
+    return HttpResponseRedirect('/ox_web/')
   else:
     post_form = BlogPost()
 
-  return render(request, 'ox_web/add_post.html', {'post_form': post_form})
+  return render(request, 'ox_web/add_post.html', {'post_form': post_form, 'username': username})
     
-
 def register(request):
   registered = False;
 
@@ -59,8 +76,9 @@ def register(request):
   return render(request, 'ox_web/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def jobs(request, username):
-  print username
-  return render(request, 'ox_web/jobs.html', {})
+  jobs = Job.objects.all().filter(author=username)
+  context_dict = {'jobs': jobs, 'username': username}
+  return render(request, 'ox_web/jobs.html', context_dict)
 
 def contact(request):
   return render(request, 'ox_web/contact.html', {})

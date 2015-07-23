@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}New Job{% endblock %}
+
+{% block body_block %}
+<div class="col-9">
+  <h1>Start a new job</h1>
+  <h5>Leave blank to use defaults in parentheses.</h5>
+  <form id="start_job" method="post" action="/ox_web/new_job/" enctype=multipart/form-data">
+  {% csrf_token %}
+  {{ in_form.as_p }}
+  <input type="submit" name="submit" value="Start Job" />
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+{% endblock %}

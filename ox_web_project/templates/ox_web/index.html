@@ -14,11 +14,10 @@
   {% if blog_list %}
     <ul>
       {% for post in blog_list %}
-        <li>{{ post.title }}</li>
+        <h3>{{ post.title }}</h3>
         {{ post.body }}
-        <br />
-        {{ post.posted }}
-        <br /><br />
+        <h6>{{ post.posted }} by {{ post.author }}</h6>
+        <br /><hr><br />
       {% endfor %}
     </ul>
   {% else %}

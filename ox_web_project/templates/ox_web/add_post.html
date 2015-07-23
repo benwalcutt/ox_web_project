@@ -7,9 +7,13 @@
 {% block body_block %}
   <h1>Add an update post</h1>
 
-  <form id="add_post" method="post" action="/ox_web/add_post/" enctype="multipart/form-data">
+  <form id="add_post" method="post" action="/ox_web/{{username}}/add_post/" enctype="multipart/form-data">
 
     {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+
     {{ post_form.as_p }}
 
   <input type="submit" name="submit" value="Create Post" />
