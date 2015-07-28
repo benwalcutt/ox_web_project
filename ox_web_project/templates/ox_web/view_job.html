@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}View Job{% endblock %}
+{% block title %}View Job {{job.id}}{% endblock %}
 
 {% block body_block %}
   <div class="col-9">
@@ -12,6 +12,14 @@
   {% if job.active %}
     <input type="submit" name="execute_job" value="Start Job">
   {% endif %}
+  <br />
+  <h5>Files with job:</h5>
+  {% for i in files %}
+  {{ i }}
+  <br />
+  {% endfor %}
+  <h6>Created at: {{ job.created_at }}<br />
+  Executed at: {{ job.executed_at }}</h6>
   </form>
   </div>
 {% endblock %}

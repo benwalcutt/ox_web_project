@@ -5,12 +5,12 @@
 {% block title%}Home{% endblock %}
 
 {% block body_block %}
+  <div class="col-9">
   {% if user.is_authenticated %}
     <h1 style="text-transform: capitalize;">Hello {{user.username}}</h1>
   {% else %}
     <h1>Please login or register.</h1>
   {% endif %}
-
   {% if blog_list %}
     <ul>
       {% for post in blog_list %}
@@ -23,5 +23,10 @@
   {% else %}
     There are no posts.
   {% endif %}
-  
+  </div>
+  <div class="col-3 menu">
+    <ul>
+      <li><a href="ox_web/{{ username }}/add_post/">Add Post</a></li>
+    <ul>
+  </div>  
 {% endblock %}

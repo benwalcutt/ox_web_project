@@ -24,7 +24,6 @@
       {% if user.is_authenticated %}
       <li><a href="/ox_web/" class="left_list">Dashboard</a></li>
       <li><a href="/ox_web/{{ user.username }}/jobs/" class="left_list">My Jobs</a></li>
-      <li><a href="/ox_web/{{ user.username }}/add_post/" class="left_list">Add Post</a></li>
       <li><a href="/ox_web/logout/" class="left_list">Logout</a></li>
       {% else %}
       <li><a href="/ox_web/login/" class="left_list">Login</a></li>

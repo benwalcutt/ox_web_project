@@ -15,8 +15,13 @@ DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 @login_required
 def view_job(request, username, job_id):
   job = Job.objects.get(id=job_id)
+  NEW_PATH = DATA_PATH + "/data/" + username + "/" + job_id
+  files = []
+  print "DEBUG:"
+  files = os.listdir(NEW_PATH)
+  print files
 #  job.viewed_at = timezone.now()
-  context_dict = {'username': username, 'job': job}
+  context_dict = {'username': username, 'job': job, 'files': files}
   return render(request, 'ox_web/view_job.html', context_dict)
 
 @login_required
