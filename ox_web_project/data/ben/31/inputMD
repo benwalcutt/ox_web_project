@@ -1,0 +1,29 @@
+sim_type = MD
+backend = CPU
+backend_precision = double
+interaction_type = NBLOCK
+
+steps = 10000
+newtonian_steps = 103
+diff_coeff = 2.50
+thermostat = john
+
+salt_concentration = 0.5
+base_angle_range = 360
+strand_orthogonality_range = 360
+
+T = 298 K
+dt = 0.005
+verlet_skin = 0.05
+
+topology = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/generated.top
+conf_file = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/generated.dat
+last_conf_file = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/last_conf.dat
+trajectory_file = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/trajectory.dat
+refresh_vel = 1
+log_file = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/log_file.log
+restart_step_counter = 1
+energy_file = /home/ben/Documents/web/ox_web_project/ox_web_project/data/ben/31/energy.dat
+print_conf_interval = 100
+print_energy_every = 100
+time_scale = linear

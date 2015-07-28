@@ -5,27 +5,51 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from ox_web.models import Blog, Job
 from django.utils import timezone
-import os
-import ox_web.utils
+import os, subprocess
+import oxutils
 
 DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # Create your views here.
 
+@login_required
+def view_job(request, username, job_id):
+  job = Job.objects.get(id=job_id)
+#  job.viewed_at = timezone.now()
+  context_dict = {'username': username, 'job': job}
+  return render(request, 'ox_web/view_job.html', context_dict)
+
+@login_required
+def execute(request, username, job_id):
+  job = Job.objects.get(id=job_id)
+  job.executed_at = timezone.now()
+  job.save()
+  CMD = ['/home/ben/Documents/oxDNA_gold/branches/oxDNA_v2.2_branch/oxDNA/build/bin/oxDNA', DATA_PATH + '/data/' + request.user.username + '/' + job_id + '/inputMD']
+  subprocess.Popen(CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  return HttpResponseRedirect('/ox_web/' + username + '/jobs/')
+
+@login_required
 def new_job(request):
   if request.method == 'POST':
     in_form = InputForm(data=request.POST)
     JOB_PATH = DATA_PATH + '/data/' + request.user.username
-    job = Job(author=request.user.username, created_at=timezone.now(), data_path=JOB_PATH)
+    job = Job(author=request.user.username, created_at=timezone.now(), data_path=JOB_PATH, active=True)
     job.save()
     job.output_path = JOB_PATH + '/' + str(job.id)
+    job.executed_at = None
     job.save()
-
-    os.mkdir(DATA_PATH + '/data/' + request.user.username + '/' + str(job.id))
+    NEW_PATH = DATA_PATH + '/data/' + request.user.username + '/' + str(job.id)
+    os.mkdir(NEW_PATH)
 
     if in_form.is_valid():
       inputfile = in_form.cleaned_data
-      
+      inputfile['topology'] = NEW_PATH + '/generated.top'
+      inputfile['conf_file'] = NEW_PATH + '/generated.dat'
+      inputfile['last_conf_file'] = NEW_PATH + '/last_conf.dat'
+      inputfile['trajectory_file'] = NEW_PATH + '/trajectory.dat'
+      inputfile['log_file'] = NEW_PATH + '/log_file.log'
+      inputfile['energy_file'] = NEW_PATH + '/energy.dat'
+      oxutils.test(inputfile, request.user.username, job.id)      
     else:
       print in_form.errors
     
@@ -37,7 +61,7 @@ def new_job(request):
 
 
 def test(request):
-  utils.test()
+  oxutils.test(None, 'ben', 16)
   return HttpResponseRedirect('/ox_web/')
 
 @login_required
@@ -86,8 +110,9 @@ def register(request):
 
   return render(request, 'ox_web/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
+@login_required
 def jobs(request, username):
-  jobs = Job.objects.all().filter(author=username)
+  jobs = Job.objects.all().filter(author=username, active=True).order_by('-id')
   context_dict = {'jobs': jobs, 'username': username}
   return render(request, 'ox_web/jobs.html', context_dict)
 

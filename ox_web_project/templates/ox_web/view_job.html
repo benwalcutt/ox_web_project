@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}View Job{% endblock %}
+
+{% block body_block %}
+  <div class="col-9">
+  <h1>Job {{ job.id }}</h1>
+  <form id="job_form" method="post" action="/ox_web/{{ username }}/{{ job.id }}/execute/">
+  {% csrf_token %}
+  {% if job.active %}
+    <input type="submit" name="execute_job" value="Start Job">
+  {% endif %}
+  </form>
+  </div>
+{% endblock %}

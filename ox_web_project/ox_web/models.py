@@ -31,3 +31,5 @@ class Job(models.Model):
   created_at = models.DateTimeField(default=timezone.now)
   data_path = models.CharField(max_length=200)
   output_path = models.CharField(max_length=200)
+  active = models.BooleanField(default=True)
+  executed_at = models.DateTimeField(default=timezone.now, null=True)

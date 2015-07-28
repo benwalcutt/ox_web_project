@@ -1,0 +1,5 @@
+sim_type = MD
+backend = CPU
+backend_precision = double
+interaction_type = NBLOCK
+

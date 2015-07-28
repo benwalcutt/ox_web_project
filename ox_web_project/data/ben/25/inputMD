@@ -1,0 +1,14 @@
+sim_type = MD
+backend = CPU
+backend_precision = double
+interaction_type = NBLOCK
+
+steps = 10000
+newtonian_steps = 103
+diff_coeff = 2.50
+thermostat = john
+
+salt_concentration = 0.5
+base_angle_range = 360
+strand_orthogonality_range = 360
+

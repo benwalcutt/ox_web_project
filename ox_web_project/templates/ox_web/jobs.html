@@ -7,21 +7,26 @@
 {% block body_block %}
   <div class="col-9">
     <h1>My Jobs</h1>
-
     {% if jobs %}
       {% for i in jobs %}
-       <h5>Job ID: {{ i.id}}</h5>
-       <h6>Created at: {{ i.created_at }}</h6
+       <div class="notathing">
+       <a href="/ox_web/{{ username }}/{{ i.id }}/view_job/">Job ID: {{ i.id}}</a>
+       <h5>Active? {{ i.active }}</h5>
+       <h6>Created at: {{ i.created_at }}<br />
+       Executed at: {{ i.executed_at }}</h6>
        <br />
        <hr>
+       </div>
       {% endfor %}
     {% else %}
       No jobs found.
     {% endif %}
+    <br />
+    <br />
   </div>
   <div class="col-3 menu">
     <ul>
-      <li><a class="left_list" href="/ox_web/new_job/">New Job</a></li>
+      <li><a href="/ox_web/new_job/">New Job</a></li>
     </ul>
   </div>
     
