@@ -27,7 +27,7 @@
   <div class="col-3 menu">
     {% if user.is_authenticated %}
     <ul>
-      <li><a href="ox_web/{{ username }}/add_post/">Add Post</a></li>
+      <li><a href="/ox_web/{{ user.username }}/add_post/">Add Post</a></li>
     <ul>
     {% endif %}
   </div>  

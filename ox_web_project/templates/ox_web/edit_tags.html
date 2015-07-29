@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ job.id }} Edit Tags{% endblock %}
+
+{% block body_block %}
+  <h1>Job {{ job.id }} Edit Tags</h1>
+  <form id="edit_tags" method="post" action="/ox_web/{{ username }}/{{ job.id }}/edit_tags/">
+  {% csrf_token %}
+  Tag 1:<input type="text" name="tag1" value="{{job.tag1}}">
+  <br />
+  Tag 2:<input type="text" name="tag2" value="{{job.tag2}}">
+  <br />
+  Tag 3:<input type="text" name="tag3" value="{{job.tag3}}">
+  <br />
+  Tag 4:<input type="text" name="tag4" value="{{job.tag4}}">
+  <br />
+  <input type="submit" name="submit_edit" value="Update Tags">
+  </form>
+
+
+
+
+{% endblock %}

@@ -13,6 +13,22 @@ DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 # Create your views here.
 
 @login_required
+def edit_tags(request, username, job_id):
+  if request.method == 'POST':
+    job = Job.objects.get(id=job_id)
+    job.tag1 = request.POST.get('tag1')
+    job.tag2 = request.POST.get('tag2')
+    job.tag3 = request.POST.get('tag3')
+    job.tag4 = request.POST.get('tag4')
+    job.save()
+    
+    return HttpResponseRedirect('ox_web/' + username + '/' + job_id + '/')
+  else:
+    job = Job.objects.get(id=job_id)
+    context_dict = {'username': request.user.username, 'job': job}
+  return render(request, 'ox_web/edit_tags.html', context_dict)
+
+@login_required
 def upload(request, username, job_id):
   if request.method == 'POST':
     uploaded_file = request.FILES['uploaded_file']

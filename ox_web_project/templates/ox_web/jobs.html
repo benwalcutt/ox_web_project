@@ -11,6 +11,7 @@
       {% for i in jobs %}
        <a href="/ox_web/{{ username }}/{{ i.id }}/view_job/">Job ID: {{ i.id}}</a>
        <h5>Active? {{ i.active }}</h5>
+       <h5>Tags: {{ i.tag1 }} {{ i.tag2 }} {{ i.tag3 }} {{ i.tag4 }}</h5>
        <h6>Created at: {{ i.created_at }}<br />
        Executed at: {{ i.executed_at }}</h6>
        <br />
