@@ -33,3 +33,7 @@ class Job(models.Model):
   output_path = models.CharField(max_length=200)
   active = models.BooleanField(default=True)
   executed_at = models.DateTimeField(default=timezone.now, null=True)
+  tag1 = models.CharField(max_length=50, blank=True)
+  tag2 = models.CharField(max_length=50, blank=True)
+  tag3 = models.CharField(max_length=50, blank=True)
+  tag4 = models.CharField(max_length=50, blank=True)

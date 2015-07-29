@@ -1,27 +1,28 @@
-INFO: seeding the RNG with -1884735058
+INFO: seeding the RNG with 1293609399
 INFO: Initializing backend 
 INFO: Backend precision: double
 INFO: Simulation type: MD
 INFO: Running Debye-Huckel at salt concentration =  0.5
 INFO: Using different widths for major and minor grooves
-INFO: pid: 2529
+INFO: pid: 4921
 DEBUG: Debye-Huckel parameters: Q=0.054300, lambda_0=0.361646, lambda=0.509736, r_high=1.529209, cutoff=3.256611
 DEBUG: Debye-Huckel parameters: debye_huckel_RC=2.293813e+00, debye_huckel_B=3.023959e-03
 INFO: The Debye length at this temperature and salt concentration is 0.509736
 INFO: N_cells_side: 17
 INFO: N: 82
 INFO: Using randomly distributed velocities
-INFO: Initial kinetic energy: 23.654912
+INFO: Initial kinetic energy: 24.839591
 INFO: SVN CODE VERSION: 206
 INFO: COMPILED ON: 20/07/15
-INFO: Lists updated 57 times (every ~3.070175 steps)
+WARNING: The following particles had a displacement greater than one in this step: 62 63 
+INFO: Lists updated 32 times (every ~3.312500 steps)
 INFO: Timings informations:
 
-MD step: 0.405813 ms
-First step: 0.059869 ms
+MD step: 0.419383 ms
+First step: 0.063047 ms
 Hilbert sorting: 0.000000 ms
-Lists update: 0.037205 ms
-Forces + second step: 0.305659 ms
-Thermostat: 0.000720 ms
+Lists update: 0.036794 ms
+Forces + second step: 0.318140 ms
+Thermostat: 0.001047 ms
 
-ERROR: (DNAInteraction.cpp) During the simulation, the distance between bonded neighbors 64 and 63 exceeded acceptable values (d = 0.250853)
+ERROR: (DNAInteraction.cpp) During the simulation, the distance between bonded neighbors 63 and 62 exceeded acceptable values (d = 0.293074)

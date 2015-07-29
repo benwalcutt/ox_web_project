@@ -13,6 +13,25 @@ DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 # Create your views here.
 
 @login_required
+def upload(request, username, job_id):
+  if request.method == 'POST':
+    uploaded_file = request.FILES['uploaded_file']
+    TEMP_PATH = DATA_PATH + '/data/' + username + '/' + job_id + '/'
+    with open(TEMP_PATH + uploaded_file.name, 'wb+') as destination:
+      for chunk in uploaded_file.chunks():
+        destination.write(chunk)
+
+    return HttpResponseRedirect('/ox_web/' + username + '/' + job_id + '/view_job/')
+  context_dict = {'username': username, 'job_id': job_id}
+  return render(request, 'ox_web/upload.html', context_dict)
+
+@login_required
+def all_jobs(request, username):
+  jobs = Job.objects.all().filter(author=username).order_by('-id')
+  context_dict = {'jobs': jobs, 'username': username}
+  return render(request, 'ox_web/jobs.html', context_dict)
+
+@login_required
 def view_job(request, username, job_id):
   job = Job.objects.get(id=job_id)
   NEW_PATH = DATA_PATH + "/data/" + username + "/" + job_id
@@ -37,11 +56,20 @@ def execute(request, username, job_id):
 def new_job(request):
   if request.method == 'POST':
     in_form = InputForm(data=request.POST)
+    tag1_text = request.POST.get('tag1')
+    tag2_text = request.POST.get('tag2')
+    tag3_text = request.POST.get('tag3')
+    tag4_text = request.POST.get('tag4')
+
     JOB_PATH = DATA_PATH + '/data/' + request.user.username
     job = Job(author=request.user.username, created_at=timezone.now(), data_path=JOB_PATH, active=True)
     job.save()
     job.output_path = JOB_PATH + '/' + str(job.id)
     job.executed_at = None
+    job.tag1 = tag1_text
+    job.tag2 = tag2_text
+    job.tag3 = tag3_text
+    job.tag4 = tag4_text
     job.save()
     NEW_PATH = DATA_PATH + '/data/' + request.user.username + '/' + str(job.id)
     os.mkdir(NEW_PATH)
@@ -117,7 +145,12 @@ def register(request):
 
 @login_required
 def jobs(request, username):
-  jobs = Job.objects.all().filter(author=username, active=True).order_by('-id')
+  if request.method == 'POST':
+    search_text = request.POST.get('search_text')
+    jobs = Job.objects.all().filter(tag1=search_text) | Job.objects.all().filter(tag2=search_text) | Job.objects.all().filter(tag3=search_text) | Job.objects.all().filter(tag4=search_text)
+  else:    
+    jobs = Job.objects.all().filter(author=username, active=True).order_by('-id')
+
   context_dict = {'jobs': jobs, 'username': username}
   return render(request, 'ox_web/jobs.html', context_dict)
 

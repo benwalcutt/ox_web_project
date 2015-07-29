@@ -10,10 +10,14 @@ class JobForm(forms.ModelForm):
   output_path = forms.CharField(max_length=200, widget=forms.HiddenInput(), required=False)
   active = forms.BooleanField(widget=forms.HiddenInput(), required=False)
   executed_at = forms.DateTimeField(widget=forms.HiddenInput(), required=False)
+  tag1 = forms.CharField(max_length=50, required=False)
+  tag2 = forms.CharField(max_length=50, required=False)
+  tag3 = forms.CharField(max_length=50, required=False)
+  tag4 = forms.CharField(max_length=50, required=False)
   
   class Meta:
     model = Job
-    fields = ('author', 'created_at', 'data_path', 'output_path', 'active', 'executed_at',)
+    fields = ('author', 'created_at', 'data_path', 'output_path', 'active', 'executed_at', 'tag1', 'tag2', 'tag3', 'tag4')
 
 class UserForm(forms.ModelForm):
   password = forms.CharField(widget=forms.PasswordInput())

@@ -23,7 +23,14 @@
     <br />
   </div>
   <div class="col-3 menu">
+    <form id="search_form" method="post" action="/ox_web/{{ username }}/jobs/">
+    {% csrf_token %}
+    <input type="text" name="search_text">
+    <input type="submit" name="search_submit" value="Search jobs">
+    </form>
+    <br />
     <ul>
+      <li><a href="/ox_web/{{ username }}/all_jobs/">View All Jobs</a></li>
       <li><a href="/ox_web/new_job/">New Job</a></li>
     </ul>
   </div>

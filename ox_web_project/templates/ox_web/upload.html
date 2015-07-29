@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Upload Files{% endblock %}
+
+{% block body_block %}
+
+  <h1>Upload Files</h1>
+
+  <h5>Select file to upload:</h5>
+  <form id="upload_form" method="post" action="/ox_web/{{ username }}/{{ job_id }}/upload/" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="uploaded_file">
+  <br />
+  <input type="submit" name="upload_file" value="Upload File">
+  </form>
+
+{% endblock %}
