@@ -16,5 +16,7 @@ urlpatterns = patterns('',
 	url(r'^(?P<username>[\w]+)/(?P<job_id>[\w]+)/view_job/', views.view_job, name='view_job'),
 	url(r'^(?P<username>[\w]+)/(?P<job_id>[\w]+)/upload/', views.upload, name='upload'),
 	url(r'^(?P<username>[\w]+)/(?P<job_id>[\w]+)/edit_tags/', views.edit_tags, name='edit_tags'),
+	url(r'^(?P<username>[\w]+)/(?P<job_id>[\w]+)/inactivate/', views.inactivate, name='inactivate'),
+	url(r'^(?P<username>[\w]+)/(?P<job_id>[\w]+)/activate/', views.activate, name='activate'),
 	url(r'^test/$', views.test, name="test"),
 )

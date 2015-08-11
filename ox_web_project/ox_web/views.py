@@ -13,6 +13,20 @@ DATA_PATH = os.path.dirname(os.path.dirname(__file__))
 # Create your views here.
 
 @login_required
+def inactivate(request, username, job_id):
+  job = Job.objects.get(id=job_id)
+  job.active = False
+  job.save()
+  return HttpResponseRedirect('/ox_web/' + username + '/jobs/')
+
+@login_required
+def activate(request, username, job_id):
+  job = Job.objects.get(id=job_id)
+  job.active = True
+  job.save()
+  return HttpResponseRedirect('/ox_web/' + username + '/jobs/')
+
+@login_required
 def edit_tags(request, username, job_id):
   if request.method == 'POST':
     job = Job.objects.get(id=job_id)
@@ -22,7 +36,7 @@ def edit_tags(request, username, job_id):
     job.tag4 = request.POST.get('tag4')
     job.save()
     
-    return HttpResponseRedirect('ox_web/' + username + '/' + job_id + '/')
+    return HttpResponseRedirect('/ox_web/' + username + '/' + job_id + '/')
   else:
     job = Job.objects.get(id=job_id)
     context_dict = {'username': request.user.username, 'job': job}

@@ -3,7 +3,7 @@ backend = CPU
 backend_precision = double
 interaction_type = NBLOCK
 
-steps = 10000
+steps = 10000000
 newtonian_steps = 103
 diff_coeff = 2.50
 thermostat = john

@@ -27,6 +27,11 @@
     <li><a href="/ox_web/{{ username }}/{{ job.id }}/edit_tags/">Edit Tags</a></li>
     <li><a href="/ox_web/{{ username }}/{{ job.id }}/upload/">Upload Files</a></li>
     <li><a href="/ox_web/{{ username }}/{{ job.id }}/execute/">Start Job</a></li>
+    {% if job.active %}
+    <li><a href="/ox_web/{{ username }}/{{ job.id }}/inactivate/">Inactivate</a></li>
+    {% else %}
+    <li><a href="/ox_web/{{ username }}/{{ job.id }}/activate/">Activate</a></li>
+    {% endif %}
   </ul>
   </div>
 {% endblock %}
