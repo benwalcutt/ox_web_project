@@ -36,7 +36,7 @@ def edit_tags(request, username, job_id):
     job.tag4 = request.POST.get('tag4')
     job.save()
     
-    return HttpResponseRedirect('/ox_web/' + username + '/' + job_id + '/')
+    return HttpResponseRedirect('/ox_web/' + username + '/' + job_id + '/view_job/')
   else:
     job = Job.objects.get(id=job_id)
     context_dict = {'username': request.user.username, 'job': job}
@@ -66,11 +66,33 @@ def view_job(request, username, job_id):
   job = Job.objects.get(id=job_id)
   NEW_PATH = DATA_PATH + "/data/" + username + "/" + job_id
   files = []
-  print "DEBUG:"
   files = os.listdir(NEW_PATH)
-  print files
 #  job.viewed_at = timezone.now()
-  context_dict = {'username': username, 'job': job, 'files': files}
+  file_loc = NEW_PATH
+  progress = 0
+  traj = open(NEW_PATH + '/trajectory.dat', 'r')
+  line = traj.readline()
+  while (line):
+    temp = line.split()
+    if temp[0] == 't':
+      progress = temp[2]
+    line = traj.readline()
+  traj.close()
+
+  length = 0
+  in_file = open(NEW_PATH + '/inputMD', 'r')
+  line = in_file.readline()
+  while (line):
+    temp = line.split()
+    try:
+      if temp[0] == 'steps':
+        length = temp[2]
+    except:
+      pass
+    line = in_file.readline()
+
+  in_file.close()
+  context_dict = {'username': username, 'job': job, 'files': files, 'file_loc': file_loc, 'progress': progress, 'length': length}
   return render(request, 'ox_web/view_job.html', context_dict)
 
 @login_required
@@ -79,7 +101,8 @@ def execute(request, username, job_id):
   job.executed_at = timezone.now()
   job.save()
   CMD = ['/home/ben/Documents/oxDNA_gold/branches/oxDNA_v2.2_branch/oxDNA/build/bin/oxDNA', DATA_PATH + '/data/' + request.user.username + '/' + job_id + '/inputMD']
-  subprocess.Popen(CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#  subprocess.Popen(CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  subprocess.call(CMD)
   return HttpResponseRedirect('/ox_web/' + username + '/jobs/')
 
 @login_required

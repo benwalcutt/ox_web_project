@@ -5,18 +5,20 @@
 {% block title %}View Job {{job.id}}{% endblock %}
 
 {% block body_block %}
-  <div class="col-9">
+  <div class="col-9 main_frame">
   <h1>Job {{ job.id }}</h1>
   <h5>Tags:<br />
       {{ job.tag1 }}<br />
       {{ job.tag2 }}<br />
       {{ job.tag3 }}<br />
       {{ job.tag4 }}</h5>
+  <h5>Progress: </h5>
+  <progress value="{{ progress }}" max="{{ length }}"></progress>
   <h5>Files with job:</h5>
   {% for i in files %}
-  {{ i }}
-  <br />
+  <a href="/{{ file_loc}}/{{ i }}">{{ i }}</a>
   {% endfor %}
+  <br />
   <h6>Created at: {{ job.created_at }}<br />
   Executed at: {{ job.executed_at }}</h6>
   </form>

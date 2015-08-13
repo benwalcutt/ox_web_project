@@ -34,3 +34,16 @@ def test(parameters, user, job):
   outfile.close();
   return 0
 
+def get_progess(user, job):
+  traj = open(os.path.dirname(os.path.dirname(__file__)) + '/data/' + user + '/' + str(job) +'/trajectory.dat', 'r')
+  progress = 0
+  line = traj.readline()
+  while (line):
+    temp = line.split()
+    if temp[0] == 't':
+      progress = temp[2]
+    line = traj.readline()
+  
+  print "debug: " + progress
+  
+  return 0

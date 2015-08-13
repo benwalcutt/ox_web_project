@@ -111,3 +111,5 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = '/ox_web/login/'
+
+MEDIA_URL = '/home/ben/Documents/web/ox_web_project/ox_web_project/data/'

@@ -1,16 +1,29 @@
-INFO: seeding the RNG with -1825927999
+INFO: seeding the RNG with -1533585576
 INFO: Initializing backend 
 INFO: Backend precision: double
 INFO: Simulation type: MD
 INFO: Running Debye-Huckel at salt concentration =  0.5
 INFO: Using different widths for major and minor grooves
-INFO: pid: 3766
+INFO: pid: 18726
 DEBUG: Debye-Huckel parameters: Q=0.054300, lambda_0=0.361646, lambda=0.509736, r_high=1.529209, cutoff=3.256611
 DEBUG: Debye-Huckel parameters: debye_huckel_RC=2.293813e+00, debye_huckel_B=3.023959e-03
 INFO: The Debye length at this temperature and salt concentration is 0.509736
 INFO: N_cells_side: 11
 INFO: N: 204
 INFO: Using randomly distributed velocities
-INFO: Initial kinetic energy: 56.538358
+INFO: Initial kinetic energy: 57.754876
 INFO: SVN CODE VERSION: 206
 INFO: COMPILED ON: 20/07/15
+INFO: # Caught SIGNAL 2; setting stop = 1
+
+INFO: END OF THE SIMULATION, everything went OK!
+INFO: Lists updated 4002 times (every ~8.927036 steps)
+INFO: Timings informations:
+
+MD step: 1.944700 ms
+First step: 0.203975 ms
+Hilbert sorting: 0.000000 ms
+Lists update: 0.066107 ms
+Forces + second step: 1.668445 ms
+Thermostat: 0.001599 ms
+
